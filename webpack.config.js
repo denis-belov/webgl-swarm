@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = (env, argv) => ({
   entry: './src/index.js',
@@ -55,6 +56,11 @@ module.exports = (env, argv) => ({
         test: /\.html$/,
         use: [ { loader: 'html-loader', options: { minimize: true } } ],
       },
+
+      {
+        test: /\.(png|jpg|jpeg)$/,
+        use: [ { loader: 'base64-inline-loader' } ],
+      },
     ],
   },
 
@@ -75,6 +81,8 @@ module.exports = (env, argv) => ({
         removeAttributeQuotes: true,
       },
     }),
+
+    new CopyPlugin([ { from: 'src/models', to: 'models' } ]),
   ],
 
   devServer: {
