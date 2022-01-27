@@ -28,7 +28,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "three": "0.122.0"
+    "three": "0.137.0"
   },
   "scripts": {
     "serve": "webpack-dev-server --mode=development --open",
